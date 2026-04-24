@@ -366,10 +366,10 @@ class YOLOGeoTIFFInference:
 
 def main():
     # --- Configurações --- #
-    MODEL_PATH = r"C:\YOLO_GABRIEL\runs\segment\experiment_8\weights\best.pt"
-    GEOTIFF_PATH = r"C:\YOLO_Gabriel\imagens_uteis\SF-23-Y-B-V-2-SE-D_ORTO_RGB.tif" # Imagem RGB a ser inferida
-    CHM_FOLDER = r"C:\YOLO_GABRIEL\produtos_LiDAR\3_chm" # Pasta contendo os quadrantes CHM
-    OUTPUT_PATH = r"C:\YOLO_GABRIEL\predictions\prediction_output.gpkg"
+    MODEL_PATH = r"C:\araucaria_yolo\runs\segment\experiment_8\weights\best.pt"
+    GEOTIFF_PATH = r"C:\araucaria_yolo\imagens_uteis\SF-23-Y-B-V-2-SE-D_ORTO_RGB.tif" # Imagem RGB a ser inferida
+    CHM_FOLDER = r"C:\araucaria_yolo\produtos_LiDAR\3_chm" # Pasta contendo os quadrantes CHM
+    OUTPUT_PATH = r"C:\araucaria_yolo\predictions_c50\prediction_output.gpkg"
     DEFAULT_CHM_CRS = 31983 # CRS padrão para CHMs sem CRS definido
 
     inference = YOLOGeoTIFFInference(
@@ -378,7 +378,7 @@ def main():
         default_chm_crs=DEFAULT_CHM_CRS,
         imgsz=640, # Tamanho do patch para inferência (deve ser o mesmo do treinamento)
         overlap_ratio=0.8,
-        confidence_threshold=0.8 # Limiar de confiança para detecções
+        confidence_threshold=0.5 # Limiar de confiança para detecções
     )
 
     inference.process(

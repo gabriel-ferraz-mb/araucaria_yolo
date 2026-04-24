@@ -220,11 +220,11 @@ def generate_yolo_dataset_from_cropped_rasters(
 
 def main():
     
-    INPUT_RGB_CROP_FOLDER = r'C:\YOLO_Gabriel\imagens_uteis_crop'
-    INPUT_CHM_CROP_FOLDER = r'C:\YOLO_Gabriel\produtos_LiDAR_CHM_crop'
-    LABELS_SHAPEFILE = r"C:\YOLO_Gabriel\mascaras\mascaras_merge_bbox.shp"
+    INPUT_RGB_CROP_FOLDER = r'C:\araucaria_yolo\imagens_uteis_crop'
+    INPUT_CHM_CROP_FOLDER = r'C:\araucaria_yolo\produtos_LiDAR_CHM_crop'
+    LABELS_SHAPEFILE = r"C:\araucaria_yolo\mascaras\mascaras_merge_bbox.shp"
 
-    OUTPUT_YOLO_DATASET_FOLDER = r"C:/YOLO_Gabriel/datasets/YOLO_CHM_Composite/"
+    OUTPUT_YOLO_DATASET_FOLDER = r"C:/araucaria_yolo/datasets/YOLO_CHM_Composite/"
     
     print(f"Carregando shapefile de labels para species_id: {LABELS_SHAPEFILE}")
     try:

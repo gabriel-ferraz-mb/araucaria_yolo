@@ -161,9 +161,9 @@ def create_yolo_dataset_v4(tiff_image_path, chm_dir, output_folder, mask_gdf, sp
 # create_yolo_dataset_v4(tiff_path, Data_CHM, output_folder, mask_gdf, species_id)
 def main():
     
-    Data_RGB = r'C:\YOLO_GABRIEL\imagens_uteis'
-    Data_CHM = r'C:\YOLO_GABRIEL\produtos_LiDAR\3_chm'
-    labels   = r"C:\YOLO_Gabriel\mascara\mascaras_total.shp"
+    Data_RGB = r'C:\araucaria_yolo\imagens_uteis'
+    Data_CHM = r'C:\araucaria_yolo\produtos_LiDAR\3_chm'
+    labels   = r"C:\araucaria_yolo\mascara\mascaras_total.shp"
     
     mask_gdf = gpd.read_file(labels)
     mask_gdf['geometry'] = mask_gdf['geometry'].make_valid()
@@ -176,7 +176,7 @@ def main():
 
     for i, tiff_file in enumerate(tiff_files, start=1):
         tiff_path = os.path.join(Data_RGB, tiff_file)
-        output_folder = f"C:/YOLO_Gabriel/datasets/YOLO_CHM_Composite/"
+        output_folder = f"C:/araucaria_yolo/datasets/YOLO_CHM_Composite/"
 
         print(f"\nProcessando {i}/{len(tiff_files)}: {tiff_file}")
         create_yolo_dataset_v4(tiff_path, Data_CHM, output_folder, mask_gdf, species_id)

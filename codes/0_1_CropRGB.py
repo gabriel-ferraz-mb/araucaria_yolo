@@ -117,9 +117,9 @@ def crop_rasters_by_bbox(
 
 if __name__ == "__main__":
     # --- Configurações para RGB --- #
-    INPUT_RASTER_FOLDER_RGB = r"C:\YOLO_Gabriel\imagens_uteis"
-    BBOX_SHAPEFILE = r"C:\YOLO_Gabriel\mascaras\bbox_mascaras.shp"
-    OUTPUT_CROP_FOLDER_RGB = r"C:\YOLO_Gabriel\imagens_uteis_crop"
+    INPUT_RASTER_FOLDER_RGB = r"C:\araucaria_yolo\imagens_uteis"
+    BBOX_SHAPEFILE = r"C:\araucaria_yolo\mascaras\bbox_mascaras.shp"
+    OUTPUT_CROP_FOLDER_RGB = r"C:\araucaria_yolo\imagens_uteis_crop"
     
     print("\n--- Recortando Rasters RGB ---")
     crop_rasters_by_bbox(INPUT_RASTER_FOLDER_RGB, BBOX_SHAPEFILE, OUTPUT_CROP_FOLDER_RGB)
