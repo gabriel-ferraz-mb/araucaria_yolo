@@ -4,7 +4,6 @@ import rasterio
 import numpy as np
 import random
 from rasterio.windows import Window
-from tqdm import tqdm
 from shapely.geometry import box, Polygon, MultiPolygon
 import re
 
@@ -45,7 +44,7 @@ def generate_yolo_dataset_from_cropped_rasters(
     total_yolo_patches_generated = 0
     print(f"Iniciando geração de patches YOLO a partir de {len(all_rgb_crop_files)} RGBs recortados...")
 
-    for rgb_crop_filename in tqdm(all_rgb_crop_files, desc="Processando RGBs recortados para YOLO"):
+    for rgb_crop_filename in all_rgb_crop_files:
         rgb_crop_path = os.path.join(input_rgb_crop_dir, rgb_crop_filename)
         rgb_crop_base_name = os.path.splitext(rgb_crop_filename)[0]
 
@@ -160,11 +159,11 @@ def generate_yolo_dataset_from_cropped_rasters(
 
 def main():
     
-    INPUT_RGB_CROP_FOLDER = r'C:\YOLO_Gabriel\imagens_uteis_crop'
-    LABELS_SHAPEFILE = r"C:\YOLO_Gabriel\mascaras\mascaras_merge_bbox.shp"
+    INPUT_RGB_CROP_FOLDER = r'C:\araucaria_yolo\imagens_uteis_crop'
+    LABELS_SHAPEFILE = r"C:\araucaria_yolo\mascaras\mascaras_merge_bbox.shp"
 
     # Pasta de saída alterada para refletir que é apenas RGB
-    OUTPUT_YOLO_DATASET_FOLDER = r"C:/YOLO_Gabriel/datasets/YOLO_RGB_Pure/"
+    OUTPUT_YOLO_DATASET_FOLDER = r"C:/araucaria_yolo/datasets/YOLO_RGB_Pure/"
     
     print(f"Carregando shapefile de labels para species_id: {LABELS_SHAPEFILE}")
     try:

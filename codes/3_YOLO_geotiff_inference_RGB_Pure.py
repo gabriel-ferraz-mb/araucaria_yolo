@@ -185,15 +185,15 @@ class YOLOGeoTIFFInference:
             print(f"Resultados salvos em:\n - {path_seg}\n - {path_bbox}")
 
 def main():
-    MODEL_PATH = r"C:\YOLO_GABRIEL\runs\segment\experiment_7\weights\best.pt"
-    GEOTIFF_PATH = r"C:\YOLO_Gabriel\imagens_uteis\SF-23-Y-B-V-2-SE-D_ORTO_RGB.tif"
-    OUTPUT_PATH = r"C:\YOLO_GABRIEL\predictions\prediction_output_rgb.gpkg"
+    MODEL_PATH = r"C:\araucaria_yolo\runs\segment\experiment_9_RGB\weights\best.pt"
+    GEOTIFF_PATH = r"C:\araucaria_yolo\imagens_uteis\SF-23-Y-B-V-2-SE-D_ORTO_RGB.tif"
+    OUTPUT_PATH = r"C:\araucaria_yolo\predictions\prediction_output_rgb.gpkg"
 
     inference = YOLOGeoTIFFInference(
         model_path=MODEL_PATH,
         imgsz=640,
-        overlap_ratio=0.2,
-        confidence_threshold=0.8
+        overlap_ratio=0.8,
+        confidence_threshold=0.4
     )
 
     inference.process(

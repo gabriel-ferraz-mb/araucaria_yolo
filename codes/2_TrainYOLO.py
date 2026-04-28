@@ -11,10 +11,10 @@ if __name__ == "__main__":
 
 
     # Path to your dataset
-    Dataset = r'C:\YOLO_GABRIEL\datasets\YOLO_CHM_Composite'
+    Dataset = r'C:\araucaria_yolo\datasets\YOLO_RGB_Pure'
 
     # Path to your labels shapefile (assuming it's the same as used for data generation)
-    labels_path = r"C:\YOLO_Gabriel\mascaras\mascaras_merge_bbox.shp"
+    labels_path = r"C:\araucaria_yolo\mascaras\mascaras_merge_bbox.shp"
     mask_gdf = gpd.read_file(labels_path)
     species = sorted(mask_gdf["tree_name"].unique().tolist())
 
@@ -49,7 +49,7 @@ if __name__ == "__main__":
 
     # Load the YOLO model with pretrained weights
     # model = YOLO(r"C:\YOLO_GABRIEL\runs\segment\experiment_7\weights\best.pt")
-    model = YOLO(r"C:\YOLO_GABRIEL\runs\segment\experiment_7\weights\best.pt") 
+    model = YOLO(r"C:\araucaria_yolo\yolov8x-seg.pt") 
     device = 0 #if torch.cuda.is_available() else 'cpu'
     print(f"Usando dispositivo para treinamento: {device}")
 
@@ -64,7 +64,7 @@ if __name__ == "__main__":
         mosaic=1,
         imgsz=640,
         resume = False, 
-        name='experiment_8',           # Custom experiment name
+        name='experiment_9_RGB',           # Custom experiment name
         plots=True,
         batch=16,
         workers=8,         
