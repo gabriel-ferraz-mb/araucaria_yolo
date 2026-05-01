@@ -3,7 +3,6 @@ import rasterio
 from rasterio.mask import mask
 import geopandas as gpd
 from shapely.geometry import Polygon, MultiPolygon, box
-from tqdm import tqdm
 
 def crop_rasters_by_bbox(
     input_raster_dir: str,
@@ -45,7 +44,7 @@ def crop_rasters_by_bbox(
 
     print(f"Encontrados {len(raster_files)} arquivos GeoTIFF para processar.")
 
-    for raster_filename in tqdm(raster_files, desc="Processando rasters"):
+    for raster_filename in raster_files:
         raster_path = os.path.join(input_raster_dir, raster_filename)
         print(f"\nProcessando raster: {raster_filename}")
 
@@ -116,10 +115,10 @@ def crop_rasters_by_bbox(
     print("\nProcessamento de recorte de rasters concluído.")
 
 if __name__ == "__main__":
-    # --- Configurações para RGB --- #
-    INPUT_RASTER_FOLDER_RGB = r"C:\YOLO_Gabriel\imagens_uteis"
-    BBOX_SHAPEFILE = r"C:\YOLO_Gabriel\mascaras\bbox_mascaras.shp"
-    OUTPUT_CROP_FOLDER_RGB = r"C:\YOLO_Gabriel\imagens_uteis_crop"
+    # --- Configurações para NIR --- #
+    INPUT_RASTER_FOLDER_NIR = r"C:\araucaria_yolo\IMAGEM_IR"
+    BBOX_SHAPEFILE = r"C:\araucaria_yolo\mascaras\bbox_mascaras.shp"
+    OUTPUT_CROP_FOLDER_NIR = r"C:\araucaria_yolo\imagens_ir_crop"
     
-    print("\n--- Recortando Rasters RGB ---")
-    crop_rasters_by_bbox(INPUT_RASTER_FOLDER_RGB, BBOX_SHAPEFILE, OUTPUT_CROP_FOLDER_RGB)
+    print("\n--- Recortando Rasters NIR ---")
+    crop_rasters_by_bbox(INPUT_RASTER_FOLDER_NIR, BBOX_SHAPEFILE, OUTPUT_CROP_FOLDER_NIR)

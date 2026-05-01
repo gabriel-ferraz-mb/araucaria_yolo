@@ -11,7 +11,7 @@ if __name__ == "__main__":
 
 
     # Path to your dataset
-    Dataset = r'C:\araucaria_yolo\datasets\YOLO_RGB_Pure'
+    Dataset = r'C:\araucaria_yolo\datasets\YOLO_NIR'
 
     # Path to your labels shapefile (assuming it's the same as used for data generation)
     labels_path = r"C:\araucaria_yolo\mascaras\mascaras_merge_bbox.shp"
@@ -59,12 +59,12 @@ if __name__ == "__main__":
 
     results = model.train(
         data=save_dir,   # YAML file specifying dataset paths + class names
-        epochs=250,
+        epochs=500,
         patience=40,
         mosaic=1,
         imgsz=640,
         resume = False, 
-        name='experiment_9_RGB',           # Custom experiment name
+        name='experiment_10_NIR',           # Custom experiment name
         plots=True,
         batch=16,
         workers=8,         

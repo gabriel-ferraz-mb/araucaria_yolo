@@ -21,7 +21,7 @@ import torch
 class YOLOGeoTIFFInference:
     """
     Performs YOLO inference on large GeoTIFF images using patch-based processing.
-    Uses original RGB bands (no CHM).
+    Uses original NIR bands (no CHM).
     """
 
     def __init__(
@@ -43,8 +43,8 @@ class YOLOGeoTIFFInference:
         self.model.to(device)
         print(f"Model loaded successfully on device: {device}")
 
-    def _get_image_patches_generator(self, rgb_src: rasterio.io.DatasetReader, patch_size: int):
-        height, width = rgb_src.height, rgb_src.width
+    def _get_image_patches_generator(self, nir_src: rasterio.io.DatasetReader, patch_size: int):
+        height, width = nir_src.height, nir_src.width
         stride = int(patch_size * (1 - self.overlap_ratio))
 
         for y_start in range(0, height, stride):
@@ -52,19 +52,19 @@ class YOLOGeoTIFFInference:
                 y_end = min(y_start + patch_size, height)
                 x_end = min(x_start + patch_size, width)
 
-                rgb_window = Window(col_off=x_start, row_off=y_start, width=x_end-x_start, height=y_end-y_start)
-                rgb_patch_data = rgb_src.read([1, 2, 3], window=rgb_window) # Lê apenas R, G, B
+                nir_window = Window(col_off=x_start, row_off=y_start, width=x_end-x_start, height=y_end-y_start)
+                nir_patch_data = nir_src.read([1, 2, 3], window=nir_window) # Lê apenas R, G, B
                 
                 # Transpor para (H, W, C)
-                composed_patch = np.transpose(rgb_patch_data, (1, 2, 0))
+                composed_patch = np.transpose(nir_patch_data, (1, 2, 0))
 
                 # Preencher com zeros se o patch for menor que patch_size
                 if composed_patch.shape[0] < patch_size or composed_patch.shape[1] < patch_size:
-                    padded_patch = np.zeros((patch_size, patch_size, 3), dtype=rgb_patch_data.dtype)
+                    padded_patch = np.zeros((patch_size, patch_size, 3), dtype=nir_patch_data.dtype)
                     padded_patch[:composed_patch.shape[0], :composed_patch.shape[1]] = composed_patch
                     composed_patch = padded_patch
 
-                window_transform = rasterio.windows.transform(rgb_window, rgb_src.transform)
+                window_transform = rasterio.windows.transform(nir_window, nir_src.transform)
 
                 yield {
                     'data': composed_patch,
@@ -94,30 +94,30 @@ class YOLOGeoTIFFInference:
         return gdf
 
     def process(self, geotiff_path: str, output_path: str, min_area_pixels: int = 10, output_format: str = "geopackage") -> None:
-        print("\n" + "="*60 + "\nYOLO RGB-Only Inference Pipeline\n" + "="*60 + "\n")
+        print("\n" + "="*60 + "\nYOLO NIR Inference Pipeline\n" + "="*60 + "\n")
         
-        with rasterio.open(geotiff_path) as rgb_src:
+        with rasterio.open(geotiff_path) as nir_src:
             metadata = {
-                'crs': rgb_src.crs,
-                'transform': rgb_src.transform,
-                'width': rgb_src.width,
-                'height': rgb_src.height
+                'crs': nir_src.crs,
+                'transform': nir_src.transform,
+                'width': nir_src.width,
+                'height': nir_src.height
             }
-            print(f"GeoTIFF RGB loaded: ({rgb_src.height}, {rgb_src.width}), CRS: {metadata['crs']}")
+            print(f"GeoTIFF NIR loaded: ({nir_src.height}, {nir_src.width}), CRS: {metadata['crs']}")
 
             all_gdfs = []
             class_names = self.model.names if hasattr(self.model, 'names') else {}
             
             # Calcular total de patches
             stride = int(self.imgsz * (1 - self.overlap_ratio))
-            num_y_patches = (rgb_src.height + stride - 1) // stride
-            num_x_patches = (rgb_src.width + stride - 1) // stride
+            num_y_patches = (nir_src.height + stride - 1) // stride
+            num_x_patches = (nir_src.width + stride - 1) // stride
             total_patches = num_y_patches * num_x_patches
 
             print(f"Running inference on {total_patches} patches...")
 
             patch_idx = 0
-            for patch_info in self._get_image_patches_generator(rgb_src, self.imgsz):
+            for patch_info in self._get_image_patches_generator(nir_src, self.imgsz):
                 patch_idx += 1
                 if (patch_idx % max(1, total_patches // 10)) == 0 or patch_idx == 1 or patch_idx == total_patches:
                     print(f"  Processing patch {patch_idx}/{total_patches}")
@@ -185,15 +185,15 @@ class YOLOGeoTIFFInference:
             print(f"Resultados salvos em:\n - {path_seg}\n - {path_bbox}")
 
 def main():
-    MODEL_PATH = r"C:\araucaria_yolo\runs\segment\experiment_9_RGB\weights\best.pt"
-    GEOTIFF_PATH = r"C:\araucaria_yolo\imagens_uteis\SF-23-Y-B-V-2-SE-D_ORTO_RGB.tif"
-    OUTPUT_PATH = r"C:\araucaria_yolo\predictions\prediction_output_rgb.gpkg"
+    MODEL_PATH = r"C:\araucaria_yolo\runs\segment\experiment_10_NIR\weights\best.pt"
+    GEOTIFF_PATH = r"C:\araucaria_yolo\IMAGEM_IR\SF-23-Y-B-V-2-SE-D_ORTO_IR.tif"
+    OUTPUT_PATH = r"C:\araucaria_yolo\predictions\prediction_output_nir.gpkg"
 
     inference = YOLOGeoTIFFInference(
         model_path=MODEL_PATH,
         imgsz=640,
         overlap_ratio=0.8,
-        confidence_threshold=0.4
+        confidence_threshold=0.5
     )
 
     inference.process(

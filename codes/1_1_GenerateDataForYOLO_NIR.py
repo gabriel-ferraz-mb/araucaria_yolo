@@ -14,8 +14,8 @@ def generate_yolo_dataset_from_cropped_rasters(
     species_id: dict
 ):
     """
-    Gera o dataset YOLO a partir dos arquivos RGB recortados.
-    Usa as 3 bandas originais (R, G, B).
+    Gera o dataset YOLO a partir dos arquivos NIR recortados.
+    Usa as 3 bandas originais (NIR, G, B).
     """
     tile_size = 640 
     step = tile_size // 2 
@@ -42,7 +42,7 @@ def generate_yolo_dataset_from_cropped_rasters(
         return
 
     total_yolo_patches_generated = 0
-    print(f"Iniciando geração de patches YOLO a partir de {len(all_rgb_crop_files)} RGBs recortados...")
+    print(f"Iniciando geração de patches YOLO a partir de {len(all_rgb_crop_files)} NIRs recortados...")
 
     for rgb_crop_filename in all_rgb_crop_files:
         rgb_crop_path = os.path.join(input_rgb_crop_dir, rgb_crop_filename)
@@ -150,7 +150,7 @@ def generate_yolo_dataset_from_cropped_rasters(
                             total_yolo_patches_generated += 1
 
         except Exception as e:
-            print(f"  Erro ao processar RGB recortado {rgb_crop_filename}: {e}")
+            print(f"  Erro ao processar NIR recortado {rgb_crop_filename}: {e}")
 
     if total_yolo_patches_generated == 0:
         print("\nAviso: Nenhum patch YOLO foi gerado. Verifique os insumos recortados, labels e regras de contenção.")
@@ -159,11 +159,11 @@ def generate_yolo_dataset_from_cropped_rasters(
 
 def main():
     
-    INPUT_RGB_CROP_FOLDER = r'C:\araucaria_yolo\imagens_uteis_crop'
+    INPUT_NIR_CROP_FOLDER = r'C:\araucaria_yolo\imagens_ir_crop'
     LABELS_SHAPEFILE = r"C:\araucaria_yolo\mascaras\mascaras_merge_bbox.shp"
 
-    # Pasta de saída alterada para refletir que é apenas RGB
-    OUTPUT_YOLO_DATASET_FOLDER = r"C:/araucaria_yolo/datasets/YOLO_RGB_Pure/"
+    # Pasta de saída alterada para refletir que é apenas NIR
+    OUTPUT_YOLO_DATASET_FOLDER = r"C:/araucaria_yolo/datasets/YOLO_NIR/"
     
     print(f"Carregando shapefile de labels para species_id: {LABELS_SHAPEFILE}")
     try:
@@ -175,9 +175,9 @@ def main():
     species = sorted(labels_gdf_for_species['tree_name'].unique().tolist())
     species_id = {specie: i for i, specie in enumerate(species)}
 
-    print("\n--- GERANDO DATASET YOLO A PARTIR DOS INSUMOS RGB E LABELS ---")
+    print("\n--- GERANDO DATASET YOLO A PARTIR DOS INSUMOS NIR E LABELS ---")
     generate_yolo_dataset_from_cropped_rasters(
-        INPUT_RGB_CROP_FOLDER,
+        INPUT_NIR_CROP_FOLDER,
         LABELS_SHAPEFILE,
         OUTPUT_YOLO_DATASET_FOLDER,
         species_id
