@@ -48,8 +48,8 @@ if __name__ == "__main__":
     pretrained_weights = 'yolov8x-seg.pt'
 
     # Load the YOLO model with pretrained weights
-    # model = YOLO(r"C:\YOLO_GABRIEL\runs\segment\experiment_7\weights\best.pt")
-    model = YOLO(r"C:\araucaria_yolo\yolov8x-seg.pt") 
+    model = YOLO(r"C:\araucaria_yolo\runs\segment\experiment_9_RGB\weights\best.pt")
+    # model = YOLO(r"C:\araucaria_yolo\yolov8x-seg.pt") 
     device = 0 #if torch.cuda.is_available() else 'cpu'
     print(f"Usando dispositivo para treinamento: {device}")
 
@@ -59,12 +59,12 @@ if __name__ == "__main__":
 
     results = model.train(
         data=save_dir,   # YAML file specifying dataset paths + class names
-        epochs=250,
+        epochs=500,
         patience=40,
         mosaic=1,
         imgsz=640,
         resume = False, 
-        name='experiment_9_RGB',           # Custom experiment name
+        name='experiment_11_RGB',           # Custom experiment name
         plots=True,
         batch=16,
         workers=8,         
