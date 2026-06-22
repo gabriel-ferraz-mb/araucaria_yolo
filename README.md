@@ -6,7 +6,7 @@ Detection of *Araucaria angustifolia* individuals in high-resolution aerial imag
 
 ## Overview
 
-This repository contains the initial experiments for individual-level detection of *Araucaria angustifolia* — the Paraná pine, a critically endangered species endemic to the Atlantic Forest — using convolutional object detectors applied to aerial orthophotos. The study area is located in the state of Paraná, Brazil.
+This repository contains the initial experiments for individual-level detection of *Araucaria angustifolia* — the Paraná pine, a critically endangered species endemic to the Atlantic Forest — using convolutional object detectors applied to aerial orthophotos. The study area covers regions classified as Mixed Ombrophilous Forest (*Floresta Ombrófila Mista*) phytophysiognomy within the state of São Paulo, Brazil.
 
 The work explores multiple input configurations to assess the contribution of spectral and structural information beyond standard RGB imagery, including near-infrared bands (GBNIR) and a Canopy Height Model (CHM) derived from LiDAR data.
 
@@ -16,7 +16,7 @@ This repository represents an early-stage baseline and was followed by more adva
 
 ## Study Area and Data
 
-- **Location:** Paraná state, southern Brazil
+- **Location:** Regions classified as Mixed Ombrophilous Forest (*Floresta Ombrófila Mista*) phytophysiognomy, state of São Paulo, Brazil
 - **Imagery:** High-resolution RGB and GBNIR aerial orthophotos at 0.15 m/pixel
 - **Structural data:** LiDAR-derived Canopy Height Model (CHM) at ~40 cm point sampling
 - **Annotations:** Bounding box annotations for *Araucaria angustifolia* crowns, stored as shapefiles
