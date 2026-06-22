@@ -7,8 +7,8 @@ import shutil
 from tqdm import tqdm
 
 def debug_full_dataset():
-    data_path = r'D:\YOLO_Gabriel\imagens'
-    labels_path = r"D:\YOLO_Gabriel\mascara\mascaras_merge_v2.shp"
+    data_path = r'D:\araucaria_yolo\imagens'
+    labels_path = r"D:\araucaria_yolo\mascara\mascaras_merge_v2.shp"
     
     print("=== INICIANDO DEBUG GLOBAL ===")
     
@@ -80,9 +80,9 @@ if __name__ == '__main__':
 
 def filtrar_imagens_uteis():
     # --- CONFIGURAÇÃO DE CAMINHOS ---
-    path_original = r'D:\YOLO_Gabriel\imagens'
-    path_destino  = r'D:\YOLO_Gabriel\imagens_uteis' # Nova pasta
-    path_labels   = r"D:\YOLO_Gabriel\mascara\mascaras_merge_v2.shp"
+    path_original = r'D:\araucaria_yolo\imagens'
+    path_destino  = r'D:\araucaria_yolo\imagens_uteis' # Nova pasta
+    path_labels   = r"D:\araucaria_yolo\mascara\mascaras_merge_v2.shp"
     
     os.makedirs(path_destino, exist_ok=True)
 

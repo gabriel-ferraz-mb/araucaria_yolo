@@ -6,7 +6,7 @@ import rasterio
 import geopandas as gpd # Adicionado para carregar labels e obter species_id
 
 # Caminho para o shapefile de labels (o mesmo usado em 1_1_GenerateDataForYOLO_CHM_v2.py)
-LABELS_SHAPEFILE = r"C:\YOLO_Gabriel\mascaras\mascaras_merge_bbox.shp"
+LABELS_SHAPEFILE = r"C:\araucaria_yolo\mascaras\mascaras_merge_bbox.shp"
 
 # Carregar labels para obter o mapeamento species_id
 try:
@@ -18,8 +18,8 @@ except Exception as e:
     species_id_map = {} # Fallback para evitar erros
 
 # Paths to images and labels
-images_folder = r'C:\YOLO_GABRIEL\datasets\YOLO_CHM_Composite\images\train'
-labels_folder = r'C:\YOLO_GABRIEL\datasets\YOLO_CHM_Composite\labels\train'
+images_folder = r'C:\araucaria_yolo\datasets\YOLO_CHM_Composite\images\train'
+labels_folder = r'C:\araucaria_yolo\datasets\YOLO_CHM_Composite\labels\train'
 
 # Get list of image files (now looking for .tif files)
 image_files = [f for f in os.listdir(images_folder) if f.lower().endswith(('.tif', '.tiff'))]

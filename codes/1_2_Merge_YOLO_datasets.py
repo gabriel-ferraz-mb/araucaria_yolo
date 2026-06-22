@@ -69,10 +69,10 @@ def copy_files_with_retry(source_folder, target_folder, max_retries=5, delay=1):
                     break
 
 # Path to the root folder that contains YOLO1, YOLO2, YOLO3, etc.
-source_root = r'D:\YOLO_Gabriel\datasets'
+source_root = r'D:\araucaria_yolo\datasets'
 
 # Path to the target YOLO_ALL folder
-target_root = r'D:\YOLO_Gabriel\YOLO_ALL'
+target_root = r'D:\araucaria_yolo\YOLO_ALL'
 
 # Merge the YOLO folders
 merge_yolo_folders(source_root, target_root)
@@ -113,8 +113,8 @@ def remove_non_matching_files(images_folder, labels_folder, non_matching_images,
 
 def main():
     # Paths to the 'images' and 'labels' folders
-    images_folder = r'D:\YOLO_Gabriel\/YOLO_ALL/images/val'
-    labels_folder = r'D:\YOLO_Gabriel\/YOLO_ALL/labels/val'
+    images_folder = r'D:\araucaria_yolo\/YOLO_ALL/images/val'
+    labels_folder = r'D:\araucaria_yolo\/YOLO_ALL/labels/val'
 
     # Find non-matching files
     non_matching_images, non_matching_labels = find_non_matching_files(images_folder, labels_folder)
@@ -128,8 +128,8 @@ def main():
     print("Non-matching files removed.")
     
     # Paths to the 'images' and 'labels' folders
-    images_folder = r'D:\YOLO_Gabriel\YOLO_ALL/images\train'
-    labels_folder = r'D:\YOLO_Gabriel\YOLO_ALL\labels\train'
+    images_folder = r'D:\araucaria_yolo\YOLO_ALL/images\train'
+    labels_folder = r'D:\araucaria_yolo\YOLO_ALL\labels\train'
 
     # Find non-matching files
     non_matching_images, non_matching_labels = find_non_matching_files(images_folder, labels_folder)
@@ -153,8 +153,8 @@ import random
 import numpy as np
 
 # Paths to images and labels
-images_folder = r'D:\YOLO_Gabriel\YOLO_ALL\images\train'
-labels_folder = r'D:\YOLO_Gabriel\YOLO_ALL\labels\train'
+images_folder = r'D:\araucaria_yolo\YOLO_ALL\images\train'
+labels_folder = r'D:\araucaria_yolo\YOLO_ALL\labels\train'
 
 # Get list of image files
 image_files = [f for f in os.listdir(images_folder) if f.endswith('.jpg')]

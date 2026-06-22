@@ -163,8 +163,8 @@ def create_yolo_dataset_v4(tiff_image_path, output_folder, mask_gdf, species_id)
                         f.write(buffer)
 
 def main():
-    Data   = r'O:\YOLO_GABRIEL\imagens_uteis'
-    labels = r"O:\YOLO_Gabriel\mascara\mascaras_merge_v2.shp"
+    Data   = r'O:\araucaria_yolo\imagens_uteis'
+    labels = r"O:\araucaria_yolo\mascara\mascaras_merge_v2.shp"
     
     # Read shapefile
     mask_gdf = gpd.read_file(labels)
@@ -191,7 +191,7 @@ def main():
 
     for i, tiff_file in enumerate(tiff_files, start=1):
         tiff_image_path = os.path.join(Data, tiff_file)
-        output_folder   = f"O:/YOLO_Gabriel/datasets/YOLO{i}/"
+        output_folder   = f"O:/araucaria_yolo/datasets/YOLO{i}/"
 
         print(f"\nProcessing image {i}/{len(tiff_files)}: {tiff_file}")
 

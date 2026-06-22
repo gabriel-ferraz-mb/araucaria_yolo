@@ -165,9 +165,9 @@ def merge_and_crop_chm(
 
 
 if __name__ == "__main__":
-    INPUT_CHM_FOLDER = r"C:\YOLO_GABRIEL\produtos_LiDAR\3_chm"
-    BBOX_SHAPEFILE = r"C:\YOLO_Gabriel\mascaras\bbox_mascaras.shp"
-    OUTPUT_CROP_FOLDER = r"C:\YOLO_Gabriel\produtos_LiDAR_CHM_crop"
+    INPUT_CHM_FOLDER = r"C:\araucaria_yolo\produtos_LiDAR\3_chm"
+    BBOX_SHAPEFILE = r"C:\araucaria_yolo\mascaras\bbox_mascaras.shp"
+    OUTPUT_CROP_FOLDER = r"C:\araucaria_yolo\produtos_LiDAR_CHM_crop"
     TARGET_CRS_EPSG = 31983
 
     merge_and_crop_chm(
